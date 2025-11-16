@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greeting Page (Escaped)</title>
+</head>
+<body>
+  <h1>Welcome</h1>
+  <div id="greeting"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name") || "Guest";
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    const safeName = escapeHtml(name);
+    const greetingDiv = document.getElementById("greeting");
+
+    // Only the trusted template HTML is unescaped; user input is escaped
+    greetingDiv.innerHTML = "Hello, <strong>" + safeName + "</strong>!";
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Safe Calculator</title>
+  </head>
+  <body>
+    <input id="num1" type="number" step="any" placeholder="First number" />
+    <select id="op">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input id="num2" type="number" step="any" placeholder="Second number" />
+    <button id="calcBtn">Calculate</button>
+    <div id="result"></div>
+
+    <script>
+      document.getElementById("calcBtn").addEventListener("click", () => {
+        const a = parseFloat(document.getElementById("num1").value);
+        const b = parseFloat(document.getElementById("num2").value);
+        const op = document.getElementById("op").value;
+        const resultDiv = document.getElementById("result");
+
+        if (Number.isNaN(a) || Number.isNaN(b)) {
+          resultDiv.textContent = "Please enter valid numbers.";
+          return;
+        }
+
+        let result;
+        switch (op) {
+          case "+":
+            result = a + b;
+            break;
+          case "-":
+            result = a - b;
+            break;
+          case "*":
+            result = a * b;
+            break;
+          case "/":
+            if (b === 0) {
+              resultDiv.textContent = "Division by zero is not allowed.";
+              return;
+            }
+            result = a / b;
+            break;
+          default:
+            resultDiv.textContent = "Invalid operator.";
+            return;
+        }
+
+        resultDiv.textContent = "Result: " + result;
+      });
+    </script>
+  </body>
+</html>

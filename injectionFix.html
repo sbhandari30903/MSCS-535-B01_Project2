@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Greeting Page (Safe)</title>
+  </head>
+  <body>
+    <h1>Welcome</h1>
+    <div id="greeting"></div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get("name") || "Guest";
+
+      const greetingDiv = document.getElementById("greeting");
+
+      // SAFE: textContent outputs text, not HTML
+      greetingDiv.textContent = "Hello, " + name + "!";
+    </script>
+  </body>
+</html>
