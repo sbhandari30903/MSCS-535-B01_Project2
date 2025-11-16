@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Eval Calculator</title>
+  </head>
+  <body>
+    <input id="expr" placeholder="Enter expression, e.g. 2+2" />
+    <button id="calcBtn">Calculate</button>
+    <div id="result"></div>
+
+    <script>
+      document.getElementById("calcBtn").addEventListener("click", () => {
+        const expr = document.getElementById("expr").value;
+
+        // VULNERABLE: evaluating arbitrary JavaScript from the user
+        try {
+          const result = eval(expr); // <- dangerous dynamic evaluation
+          document.getElementById("result").textContent = "Result: " + result;
+        } catch (e) {
+          document.getElementById("result").textContent =
+            "Error: " + e.message;
+        }
+      });
+    </script>
+  </body>
+</html>

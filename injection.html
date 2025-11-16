@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Greeting Page</title>
+  </head>
+  <body>
+    <h1>Welcome</h1>
+    <div id="greeting"></div>
+
+    <script>
+      // Get `name` parameter from URL, e.g. ?name=Alice
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get("name") || "Guest";
+
+      // VULNERABLE: directly injecting untrusted data into innerHTML
+      document.getElementById("greeting").innerHTML =
+        "Hello, " + name + "!";
+    </script>
+  </body>
+</html>
